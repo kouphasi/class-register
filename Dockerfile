@@ -35,5 +35,5 @@ RUN apt-get update \
 COPY . .
 
 EXPOSE 8080
-# CMD ["node", "src/server.js"]
 CMD ["google-chrome-stable"]
+CMD ["node", "src/server.js"]
