@@ -8,8 +8,11 @@
             "height": 1000
         },
         "args": [
-            "--lang=ja"
-        ]
+            "--lang=ja",
+            "--no-sandbox",
+            "--disable-extensions"
+        ],
+        "executablePath": "google-chrome-stable"
     },
     "TEXT_CHANGE": {
         "1": {
