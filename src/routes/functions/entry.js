@@ -45,7 +45,7 @@ const doIt = async function(club, schedule_set){
             await page.waitForTimeout(1000); //1秒待つ
             await action.xpath_type(xpath.DATE_INPUT, date); //日付入力
             await action.xpath_type(xpath.TIME, time); //時間入力
-            await action.xpath_click(xpath.OUT_CAMPUS); //学外団体との合同使用の有無
+            // await action.xpath_click(xpath.OUT_CAMPUS); //学外団体との合同使用の有無
 
             await page.waitForTimeout(1000); //1秒待つ
             await action.xpath_type(xpath.NOTICES, schedule.NOTICES); //特記事項入力
@@ -54,10 +54,14 @@ const doIt = async function(club, schedule_set){
             let comment = (`・日付: ${date}, 時刻: ${time}, 利用施設: ${class_room_name}`)
             console.log(comment)
 
-            // await Promise.all([
-            //     page.waitForXPath('//span[contains(text(), "ありがとうございます")]'), //送信完了を確認するまで待つ
-            //     action.xpath_click(xpath.SUBMIT) //フォームを送信する
-            // ])
+            await Promise.all([
+                page.waitForXPath('//span[contains(text(), "ありがとうございます")]'), //送信完了を確認するまで待つ
+                action.xpath_click(xpath.SUBMIT) //フォームを送信する
+            ]).then(values => {
+                console.log("done")
+                console.log(values)
+            })
+            console.log("finish")
             const success = true
             console.log('フォーム送信成功')
         }
@@ -65,7 +69,7 @@ const doIt = async function(club, schedule_set){
         console.log(e)
         return {
             access: false,
-            error: e
+            error: e,
         }
     } finally {
         await browser.close();

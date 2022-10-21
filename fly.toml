@@ -1,6 +1,6 @@
-# fly.toml file generated for sophiaess-class-register on 2022-10-07T01:19:27+09:00
+# fly.toml file generated for sophiaess-class-entry on 2022-10-19T15:18:48+09:00
 
-app = "sophiaess-class-register"
+app = "sophiaess-class-entry"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
