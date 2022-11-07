@@ -25,44 +25,38 @@ const doIt = async function(club, schedule_set){
             let time = await schedule.TIME;
 
             await action.page_goto(schedule_set.FORM_URL); //申請フォームへ遷移
-            const access = true;
             console.log('フォームアクセス成功')
             await page.waitForTimeout(2000); //2秒待つ
 
             await action.xpath_type(xpath.CLUB_NAME, text.CLUB_NAME); //課外活動団体名入力
             await action.xpath_type(xpath.REPRESENT_NAME, text.REPRESENT_NAME); //申請者氏名入力
             await action.xpath_type(xpath.STUDENT_NUMBER, text.STUDENT_NUMBER); //学生番号入力
-
+            await page.waitForTimeout(1000); //2秒待つ
             await action.xpath_click(xpath.GUIDE_CONF); //「課外活動ガイドライン」と「使用可能施設一覧・申請方法」読んだ？
-            await page.waitForTimeout(500)
+            await page.waitForTimeout(1000); //2秒待つ
             await action.xpath_click(xpath.AVAILABILITY_CONF); //空き情報確認した？
 
-            await action.text_search_click(xpath.BUILDING_SET, building_name); //使用希望施設選択
+            await action.text_search_click(xpath.BUILDING_SET, building_name); //使用希望建物の選択
 
             await page.waitForTimeout(1000); //1秒待つ
-            await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name); //使用希望施設選択
+            await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name); //使用希望教室の選択
 
             await page.waitForTimeout(1000); //1秒待つ
             await action.xpath_type(xpath.DATE_INPUT, date); //日付入力
             await action.xpath_type(xpath.TIME, time); //時間入力
-            // await action.xpath_click(xpath.OUT_CAMPUS); //学外団体との合同使用の有無
 
             await page.waitForTimeout(1000); //1秒待つ
             await action.xpath_type(xpath.NOTICES, schedule.NOTICES); //特記事項入力
             await action.xpath_type(xpath.MAIL, text.MAIL); //メールアドレス入力
             await action.xpath_type(xpath.TEL, text.TEL); //電話番号入力
-            let comment = (`・日付: ${date}, 時刻: ${time}, 利用施設: ${class_room_name}`)
-            console.log(comment)
 
-            await Promise.all([
-                page.waitForXPath('//span[contains(text(), "ありがとうございます")]'), //送信完了を確認するまで待つ
-                action.xpath_click(xpath.SUBMIT) //フォームを送信する
-            ]).then(values => {
-                console.log("done")
-                console.log(values)
-            })
-            console.log("finish")
-            const success = true
+            console.log(`・日付: ${date}, 時刻: ${time}, 利用施設: ${class_room_name}`)
+
+            // await Promise.all([
+            //     page.waitForXPath('//span[contains(text(), "ありがとうございます")]'), //送信完了を確認するまで待つ
+            //     action.xpath_click(xpath.SUBMIT) //フォームを送信する
+            // ])
+
             console.log('フォーム送信成功')
         }
     } catch (e) {
@@ -73,9 +67,8 @@ const doIt = async function(club, schedule_set){
         }
     } finally {
         await browser.close();
-        
         return {
-            access:true
+            access: true
         }
     }
 
