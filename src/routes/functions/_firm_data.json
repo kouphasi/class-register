@@ -7,6 +7,7 @@
             "width": 1000,
             "height": 1000
         },
+        "executablePath":"google-chrome-stable",
         "args": [
             "--lang=ja",
             "--no-sandbox",
