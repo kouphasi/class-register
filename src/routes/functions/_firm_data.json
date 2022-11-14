@@ -1,14 +1,16 @@
 {
     "//": "このファイルはソフトウェア製作者が設定/更新すること",
     "OPTION": {
-        "headless": false,
+        "headless": true,
         "slowMo": 80,
         "defaultViewport": {
             "width": 1000,
             "height": 1000
         },
         "args": [
-            "--lang=ja"
+            "--lang=ja",
+            "--no-sandbox",
+            "--disable-extensions"
         ]
     },
     "TEXT_CHANGE": {
