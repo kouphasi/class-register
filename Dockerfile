@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:14-slim
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 WORKDIR /usr/src/app
@@ -33,6 +33,8 @@ RUN apt-get update \
 
 
 COPY . .
+
+RUN npm install
 
 EXPOSE 8080
 CMD ["google-chrome-stable"]
